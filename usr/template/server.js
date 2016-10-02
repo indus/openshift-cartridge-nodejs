@@ -4,7 +4,7 @@ var http = require('http');
 var exec = require('child_process').execSync;
 
 var server = http.createServer(function (req, res) {
-    res.writeHead(200);
+    res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
     res.write(`<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><pre>${exec('pm2 list')}</pre></html>`);
     res.end();
 });
