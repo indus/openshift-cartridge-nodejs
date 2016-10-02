@@ -30,6 +30,10 @@ function stop() {
   pm2 kill
 }
 
+function reload {
+  pm2 reload all
+}
+
 function restart() {
   stop
   start
@@ -47,6 +51,7 @@ case ${1} in
   pre-repo-archive) pre-repo-archive ;;
   build)            build            ;;
   start)            start            ;;
+  reload)			reload			 ;;
   stop)             stop             ;;
   restart)          restart          ;;
   status)           status           ;;

@@ -7,7 +7,7 @@ Vendor: www.nodejs.org
 Website: http://www.nodejs.org/
 Display-Name: PM2 + Node.js
 Cartridge-Short-Name: NODEJS
-Cartridge-Version: '1.0.0'
+Cartridge-Version: '1.0.1'
 Cartridge-Vendor: indus
 Source-Url: https://github.com/indus/openshift-cartridge-pm2nodejs.git
 Categories:
