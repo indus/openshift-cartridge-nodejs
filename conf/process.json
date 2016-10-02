@@ -1,0 +1,10 @@
+﻿{
+  "apps": [
+    {
+      "name": "pm2nodejs",
+      "cwd": process.env.OPENSHIFT_REPO_DIR,
+      "script": "server.js",
+      "instances": 4
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source $HOME/nodejs/lib/util
+
+# Add environment variables
+echo production                                > env/NODE_ENV
+echo ${OPENSHIFT_NODEJS_IP}                    > env/NODE_IP
+echo ${OPENSHIFT_NODEJS_PORT}                  > env/NODE_PORT
+echo ${OPENSHIFT_DATA_DIR}                     > env/DATA_DIR
+echo ${OPENSHIFT_DATA_DIR}.nodejs/.npm         > env/npm_config_cache
+echo ${OPENSHIFT_DATA_DIR}.nodejs/.npmrc       > env/npm_config_userconfig
+echo ${OPENSHIFT_DATA_DIR}.nodejs/.npmignore   > env/npm_config_userignorefile
+echo ${OPENSHIFT_DATA_DIR}.nodejs/.npm-init.js > env/npm_config_init_module
+echo ${OPENSHIFT_DATA_DIR}.pm2				   > env/PM2_HOME
+echo ${TMP}                                    > env/npm_config_tmp
+
+update_all
+
+client_result "Node.js $(node -v), NPM $(npm -v) and PM2 $(pm2 -v) installed."

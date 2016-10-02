@@ -1,0 +1,55 @@
+#!/bin/bash
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source $HOME/nodejs/lib/util
+
+function pre-repo-archive() {
+  if [ -d ${OPENSHIFT_REPO_DIR}node_modules ]; then
+    rm -rf ${OPENSHIFT_DATA_DIR}node_modules
+    mv -f ${OPENSHIFT_REPO_DIR}node_modules ${OPENSHIFT_DATA_DIR}
+  fi
+}
+
+function build() {
+  update_nodejs
+  update_node_modules
+  update_pm2
+  
+  if is_running "$PM2_HOME/pm2.pid"; then
+    reload
+  else
+    start
+  fi
+}
+
+function start() {
+  pm2 start "${OPENSHIFT_NODEJS_DIR}conf/process.json"
+}
+
+function stop() {
+  pm2 kill
+}
+
+function restart() {
+  stop
+  start
+}
+
+function status() {
+  pm2 status
+}
+
+function tidy() {
+  pm2 flush
+}
+
+case ${1} in
+  pre-repo-archive) pre-repo-archive ;;
+  build)            build            ;;
+  start)            start            ;;
+  stop)             stop             ;;
+  restart)          restart          ;;
+  status)           status           ;;
+  tidy)             tidy             ;;
+  *)                exit 0
+esac

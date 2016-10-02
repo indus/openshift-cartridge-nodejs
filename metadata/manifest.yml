@@ -1,0 +1,52 @@
+Name: nodejs
+Description: PM2 + Node.js cartridge (auto-updating).
+Version: '6.5.0'
+License: Node.js License
+License-Url: https://raw.githubusercontent.com/nodejs/node/master/LICENSE
+Vendor: www.nodejs.org
+Website: http://www.nodejs.org/
+Display-Name: PM2 + Node.js
+Cartridge-Short-Name: NODEJS
+Cartridge-Version: '1.0.0'
+Cartridge-Vendor: indus
+Source-Url: https://github.com/indus/openshift-cartridge-pm2nodejs.git
+Categories:
+- service
+- javascript
+- nodejs
+- pm2
+- web_framework
+Help-Topics:
+  Node.js Manual & Documentation: http://nodejs.org/api/
+Provides:
+- pm2
+- nodejs
+
+Scaling:
+  Min: 1
+  Max: 1
+
+Publishes:
+  get-doc-root:
+    Type: FILESYSTEM:doc-root
+
+Subscribes:
+  set-env:
+    Type: ENV:*
+    Required: false
+
+Endpoints:
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols:
+  - http
+  - ws
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
